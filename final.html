@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Healthcare Management System with AI</title>
+  <link rel="stylesheet" href="Style.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f9ff;
+      margin: 0;
+      padding: 0;
+    }
+    h1 {
+      text-align: center;
+      margin-top: 20px;
+      color: #2a7be4;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 30px auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 32px;
+      justify-content: center;
+    }
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(42,123,228,0.1);
+      padding: 28px 32px;
+      margin-bottom: 24px;
+      min-width: 340px;
+      flex: 1 1 340px;
+    }
+    .section-title {
+      color: #2a7be4;
+      margin-bottom: 18px;
+      font-size: 1.3rem;
+      letter-spacing: 1px;
+    }
+    /* Dashboard Icons */
+    .dashboard {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin: 40px auto;
+      flex-wrap: wrap;
+    }
+    .icon-card {
+      width: 140px;
+      height: 140px;
+      border-radius: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      color: #fff; /* white text/icons */
+      box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+    }
+    .icon-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+    }
+    .icon-card i {
+      font-size: 42px;
+      margin-bottom: 10px;
+    }
+    .icon-label {
+      font-size: 1rem;
+      font-weight: bold;
+    }
+    /* Custom colorful backgrounds */
+    .appointments { background: linear-gradient(135deg, #2196f3, #1976d2); }   /* Blue */
+    .records { background: linear-gradient(135deg, #4caf50, #2e7d32); }       /* Green */
+    .prescriptions { background: linear-gradient(135deg, #ff9800, #f57c00); } /* Orange */
+    .billing { background: linear-gradient(135deg, #e91e63, #ad1457); }       /* Pink/Red */
+
+    /* Hide forms initially */
+    .hidden {
+      display: none;
+    }
+    /* List styling */
+    .appointments-list, .records-list, .prescriptions-list, .billing-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    .appointments-list li, .records-list li, .prescriptions-list li, .billing-list li {
+      background: #f7fafd;
+      margin-bottom: 10px;
+      padding: 10px 14px;
+      border-radius: 8px;
+      border-left: 4px solid #2a7be4;
+    }
+    .no-items {
+      color: #888;
+      font-style: italic;
+    }
+    .bill-form{
+        display: flex;
+    }
+    .bill-form input[type="text"], .bill-form input[type="date"], .bill-form input[type="number"], .bill-form input[type="time"]{
+        flex: 1;
+        margin-right: 10px;
+        padding:12px;
+        border-radius: 8px;
+    }
+.bill-form textarea{
+        flex: 2;
+        margin-right: 10px;
+        padding:15px;
+        border-radius: 8px;
+    }
+
+    .hero-btn{
+        background: #2a7be4;
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 1rem;
+        margin-top: 10px;
+    }
+    .hero-btn:hover{
+        background:#1a5bb8;
+    }
+    form input, form select, form textarea {width:100%;
+        padding:.5rem;
+        margin:.3rem 0;
+        border:1px solid #ccc;
+        border-radius:8px;
+        font-size:.9rem}
+    button{
+        background:#2a7be4;
+        color:#fff;
+        border:0;
+        padding:.5rem 1rem;
+        border-radius:8px;
+        cursor:pointer;
+        font-size:.9rem;
+        margin-top:.5rem}
+    button:hover{
+        background:#1a5bb8
+    }
+    button i{
+        margin-right:.4rem
+    }
+    .section{
+        margin-top:2rem
+    }
+  </style>
+  <!-- Font Awesome for icons -->
+  <script src="https://kit.fontawesome.com/your-kit-id.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <h1>Healthcare Management System</h1>
+
+  <!-- Dashboard Icons -->
+  <div class="dashboard">
+    <div class="icon-card appointments" onclick="openSection('appointmentCard')">
+      <i class="fas fa-calendar-check"></i>
+      <div class="icon-label">Appointments</div>
+    </div>
+    <div class="icon-card records" onclick="openSection('recordCard')">
+      <i class="fas fa-notes-medical"></i>
+      <div class="icon-label">Records</div>
+    </div>
+    <div class="icon-card prescriptions" onclick="openSection('prescriptionCard')">
+      <i class="fas fa-pills"></i>
+      <div class="icon-label">Prescriptions</div>
+    </div>
+    <div class="icon-card billing" onclick="openSection('billingCard')">
+      <i class="fas fa-file-invoice-dollar"></i>
+      <div class="icon-label">Billing</div>
+    </div>
+  </div>
+
+  <!-- Hidden Sections -->
+  <div class="container">
+    <!-- Appointment Booking Card -->
+    <div id="appointmentCard" class="card hidden">
+      <div class="section-title">Book Appointment</div>
+      <form id="appointmentForm">
+        <section class="bill-form">
+        <input type="text" id="apptName" placeholder="Patient Name" required>
+        <input type="date" id="apptDate" required>
+        <input type="time" id="apptTime" required>
+        <input type="text" id="apptReason" placeholder="Reason for Appointment" required>
+        </section>
+        <button class="hero-btn" type="submit">Book Appointment</button>
+      </form>
+      <div style="margin-top:18px;">
+        <div class="section-title" style="font-size:1.1rem;">Upcoming Appointments</div>
+        <ul id="appointmentsList" class="appointments-list">
+          <li class="no-items">No appointments yet.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Medical Records Card -->
+    <div id="recordCard" class="card hidden">
+      <div class="section-title">Medical Records</div>
+      <form id="recordForm">
+        <section class="bill-form">
+        <input type="text" id="recordName" placeholder="Patient Name" required>
+        <input type="date" id="recordDate" required>
+        <textarea id="recordDetails" placeholder="Record Details" required style="padding:10px; border-radius:5px; border:1px solid #c7d0db; font-size:1rem;"></textarea>
+        </section>
+        <button class="hero-btn" type="submit">Add Record</button>
+      </form>
+      <div style="margin-top:18px;">
+        <div class="section-title" style="font-size:1.1rem;">Patient Records</div>
+        <ul id="recordsList" class="records-list">
+          <li class="no-items">No records yet.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Prescription Management Card -->
+    <div id="prescriptionCard" class="card hidden">
+      <div class="section-title">Prescriptions</div>
+      <form id="prescriptionForm">
+        <section class="bill-form">
+        <input type="text" id="prescName" placeholder="Patient Name" required>
+        <input type="date" id="prescDate" required>
+        <input type="text" id="prescMedication" placeholder="Medication" required>
+        <input type="text" id="prescDosage" placeholder="Dosage" required>
+        </section>
+        <button class=" hero-btn" type="submit">Add Prescription</button>
+      </form>
+      <div style="margin-top:18px;">
+        <div class="section-title" style="font-size:1.1rem;">Patient Prescriptions</div>
+        <ul id="prescriptionsList" class="prescriptions-list">
+          <li class="no-items">No prescriptions yet.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Billing Card -->
+    <div id="billingCard" class="card hidden">
+      <div class="section-title">Billing</div>
+      <form id="billingForm">
+        <section class="bill-form">
+        <input type="text" id="billName" placeholder="Patient Name" required>
+        <input type="date" id="billDate" required>
+        <input type="number" id="billAmount" placeholder="Amount" required>
+        <input type="text" id="billDesc" placeholder="Description" required>
+        </section>
+        <button class = "hero-btn" type="submit">Add Bill</button>
+      </form>
+      <div style="margin-top:18px;">
+        <div class="section-title" style="font-size:1.1rem;">Billing Records</div>
+        <ul id="billingList" class="billing-list">
+          <li class="no-items">No billing records yet.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Open one section at a time
+    function openSection(sectionId) {
+      const sections = document.querySelectorAll('.card');
+      sections.forEach(sec => {
+        if (sec.id === sectionId) {
+          sec.classList.toggle('hidden'); // toggle clicked one
+        } else {
+          sec.classList.add('hidden'); // close others
+        }
+      });
+    }
+  </script>
+</body>
+</html>
