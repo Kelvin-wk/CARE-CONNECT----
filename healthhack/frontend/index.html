@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>HealthHack Demo</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>HealthHack — Symptom Checker & Readmission Predictor</h1>
+
+  <section id="triage">
+    <h2>Symptom Checker</h2>
+    <label>Age: <input id="age" type="number" value="30"></label><br>
+    <label>Gender: <input id="gender" type="text" value="male"></label><br>
+    <label>Symptoms (comma separated):</label><br>
+    <textarea id="symptoms" rows="3">fever, cough</textarea><br>
+    <button id="checkBtn">Check Triage</button>
+    <pre id="triageResult"></pre>
+  </section>
+
+  <hr>
+
+  <section id="readmission">
+    <h2>Readmission Risk</h2>
+    <label>Age: <input id="r_age" type="number" value="65"></label><br>
+    <label>Length of Stay (days): <input id="r_los" type="number" value="5"></label><br>
+    <label>Comorbidity count: <input id="r_com" type="number" value="2"></label><br>
+    <label>Prior admissions (past year): <input id="r_prior" type="number" value="1"></label><br>
+    <label>Discharge condition score (0-1): <input id="r_score" type="number" step="0.1" value="0.6" min="0" max="1"></label><br>
+    <button id="predBtn">Predict Risk</button>
+    <pre id="predResult"></pre>
+  </section>
+
+  <script src="app.js"></script>
+</body>
+</html>
