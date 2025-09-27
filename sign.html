@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sign In / Sign Up</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f9ff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .auth-container {
+      background: #fff;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+    }
+    h2 {
+      color: #2a7be4;
+      margin-bottom: 20px;
+    }
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #2a7be4;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    button:hover {
+      background: #174a96;
+    }
+    .toggle {
+      margin-top: 15px;
+      font-size: 0.9rem;
+      color: #555;
+    }
+    .toggle span {
+      color: #2a7be4;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="auth-container">
+    <h2 id="formTitle">Sign In</h2>
+    <form id="authForm">
+      <input type="email" id="email" placeholder="Email" required>
+      <input type="password" id="password" placeholder="Password" required>
+      <div id="extraFields" style="display:none;">
+        <input type="text" id="fullname" placeholder="Full Name">
+      </div>
+      <button type="submit">Submit</button>
+    </form>
+    <div class="toggle">
+      <span id="toggleText">Don’t have an account? Sign Up</span>
+    </div>
+  </div>
+
+  <script>
+    const toggleText = document.getElementById("toggleText");
+    const formTitle = document.getElementById("formTitle");
+    const extraFields = document.getElementById("extraFields");
+    const authForm = document.getElementById("authForm");
+
+    let isSignUp = false;
+
+    toggleText.addEventListener("click", () => {
+      isSignUp = !isSignUp;
+      if (isSignUp) {
+        formTitle.textContent = "Sign Up";
+        extraFields.style.display = "block";
+        toggleText.textContent = "Already have an account? Sign In";
+      } else {
+        formTitle.textContent = "Sign In";
+        extraFields.style.display = "none";
+        toggleText.textContent = "Don’t have an account? Sign Up";
+      }
+    });
+
+    authForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      // In real projects -> send credentials to backend for validation
+      alert(isSignUp ? "Sign Up successful!" : "Sign In successful!");
+      window.location.href = "final.html";
+    });
+  </script>
+</body>
+</html>

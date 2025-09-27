@@ -6,20 +6,175 @@
   <link rel="stylesheet" href="style.css">
   <!-- Font Awesome for icons -->
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background: url("doctors.png") no-repeat center/cover;
+      height: 100vh;
+    }
+
+    /* Overlay */
+    .overlay {
+     
+      height: 100%;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      text-align: center;
+      padding: 0 20px;
+    }
+
+    /* Navbar */
+    .navbar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 15px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.5);
+    }
+    .navbar h2 {
+      margin: 0;
+      color: #fff;
+    }
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      list-style: none;
+    }
+    .nav-links li a {
+      color: white;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: color 0.3s;
+    }
+    .nav-links li a:hover {
+      color: #2a7be4;
+    }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      font-size: 1.8rem;
+      cursor: pointer;
+      color: white;
+    }
+
+    /* Mobile menu */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 60px;
+        right: 20px;
+        background: rgba(0, 0, 0, 0.9);
+        flex-direction: column;
+        gap: 15px;
+        padding: 20px;
+        border-radius: 8px;
+      }
+      .nav-links.active {
+        display: flex;
+      }
+      .hamburger {
+        display: block;
+      }
+    }
+
+    /* Hero text */
+    h1 {
+      font-size: 3rem;
+      margin: 0;
+    }
+    p {
+      font-size: 1.2rem;
+      margin: 10px 0;
+    }
+    p1 {
+      display: block;
+      font-size: 1rem;
+      margin-bottom: 20px;
+    }
+    h2 {
+      margin-top: 20px;
+      font-size: 2rem;
+    }
+
+    /* Button */
+    .btn-start {
+      display: inline-block;
+      background: #2a7be4;
+      color: #fff;
+      padding: 12px 24px;
+      border-radius: 6px;
+      font-size: 1.2rem;
+      text-decoration: none;
+      margin-top: 20px;
+      transition: background 0.3s;
+    }
+    .btn-start:hover {
+      background: #174a96;
+    }
+
+    /* Responsive text */
+    @media (max-width: 768px) {
+      h1 { font-size: 2.2rem; }
+      h2 { font-size: 1.5rem; }
+      p { font-size: 1rem; }
+      .btn-start { padding: 10px 20px; font-size: 1rem; }
+    }
+    @media (max-width: 480px) {
+      h1 { font-size: 1.8rem; }
+      h2 { font-size: 1.2rem; }
+      p { font-size: 0.9rem; }
+      .btn-start { padding: 8px 16px; font-size: 0.9rem; }
+    }
+  </style>
 </head>
 <body class="landing-page">
+  <!-- Navigation -->
+  <nav class="navbar">
+    <h2>Care Connect</h2>
+    <ul class="nav-links">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Services</a></li>
+      <li><a href="#">Contact</a></li>
+      <li><a href="sign.html">Login</a></li>
+    </ul>
+    <div class="hamburger" onclick="toggleMenu()">
+      <i class="fas fa-bars"></i>
+    </div>
+  </nav>
+
+  <!-- Overlay -->
   <div class="overlay">
     <header>
       <h1>Care Connect Hospital</h1>
       <p>Your Health, Our Priority</p>
+      <p1>We Treat, GOD Heals</p1>
     </header>
     <main>
       <h2>Welcome to the Future of Healthcare</h2>
       <p>Experience seamless healthcare management with AI-powered systems and expert medical care.</p>
-      <a href="final.html" class="btn-start">
+      <a href="sign.html" class="btn-start">
         <i class="fas fa-arrow-right"></i> Get Started
       </a>
     </main>
   </div>
+
+  <script>
+    function toggleMenu() {
+      document.querySelector(".nav-links").classList.toggle("active");
+    }
+  </script>
 </body>
 </html>

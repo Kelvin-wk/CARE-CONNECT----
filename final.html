@@ -57,7 +57,7 @@
       justify-content: center;
       cursor: pointer;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
-      color: #fff; /* white text/icons */
+      color: #fff;
       box-shadow: 0 3px 10px rgba(0,0,0,0.15);
     }
     .icon-card:hover {
@@ -77,8 +77,10 @@
     .records { background: linear-gradient(135deg, #4caf50, #2e7d32); }       /* Green */
     .prescriptions { background: linear-gradient(135deg, #ff9800, #f57c00); } /* Orange */
     .billing { background: linear-gradient(135deg, #e91e63, #ad1457); }       /* Pink/Red */
+    .services { background: linear-gradient(135deg, #9c27b0, #6a1b9a); }      /* Purple */
+    .insurance { background: linear-gradient(135deg, #00bcd4, #00838f); }     /* Cyan */
 
-    /* Hide forms initially */
+    
     .hidden {
       display: none;
     }
@@ -284,94 +286,178 @@
       <i class="fas fa-file-invoice-dollar"></i>
       <div class="icon-label">Billing</div>
     </div>
+    <div class="icon-card services" onclick="openSection('servicesCard')">
+      <i class="fas fa-hospital"></i>
+      <div class="icon-label">Services</div>
+    </div>
+    <div class="icon-card insurance" onclick="openSection('insuranceCard')">
+      <i class="fas fa-credit-card"></i>
+    
+      <div class="icon-label">Payments</div>
+    </div>
   </div>
 
   <!-- Hidden Sections -->
   <div class="container">
-    <!-- Appointment Booking Card -->
+    <!-- Appointments -->
     <div id="appointmentCard" class="card hidden">
       <div class="section-title">Book Appointment</div>
       <form id="appointmentForm">
-        <section class="bill-form">
-        <input type="text" id="apptName" placeholder="Patient Name" required>
-        <input type="date" id="apptDate" required>
-        <input type="time" id="apptTime" required>
-        <input type="text" id="apptReason" placeholder="Reason for Appointment" required>
-        </section>
-        <button class="hero-btn" type="submit">Book Appointment</button>
+        <div class="bill-form">
+        <input type="text" placeholder="Patient Name" required>
+        <input type="date" required>
+        <input type="time" required>
+        <input type="text" placeholder="Reason for Appointment" required>
+        </div>
+        <button class ="hero-btn" type="submit">Book Appointment</button>
       </form>
       <div style="margin-top:18px;">
         <div class="section-title" style="font-size:1.1rem;">Upcoming Appointments</div>
-        <ul id="appointmentsList" class="appointments-list">
+        <ul id="appointmentsList">
           <li class="no-items">No appointments yet.</li>
         </ul>
       </div>
     </div>
 
-    <!-- Medical Records Card -->
+    <!-- Records -->
     <div id="recordCard" class="card hidden">
       <div class="section-title">Medical Records</div>
       <form id="recordForm">
-        <section class="bill-form">
-        <input type="text" id="recordName" placeholder="Patient Name" required>
-        <input type="date" id="recordDate" required>
-        <textarea id="recordDetails" placeholder="Record Details" required style="padding:10px; border-radius:5px; border:1px solid #c7d0db; font-size:1rem;"></textarea>
-        </section>
-        <button class="hero-btn" type="submit">Add Record</button>
+      <div class="bill-form">
+        <input type="text" placeholder="Patient Name" required>
+        <input type="date" required>
+        <textarea placeholder="Record Details" required></textarea>
+        </div>
+        <button class ="hero-btn" type="submit">Add Record</button>
       </form>
       <div style="margin-top:18px;">
         <div class="section-title" style="font-size:1.1rem;">Patient Records</div>
-        <ul id="recordsList" class="records-list">
+        <ul id="recordsList">
           <li class="no-items">No records yet.</li>
         </ul>
       </div>
     </div>
 
-    <!-- Prescription Management Card -->
+    <!-- Prescriptions -->
     <div id="prescriptionCard" class="card hidden">
       <div class="section-title">Prescriptions</div>
       <form id="prescriptionForm">
-        <section class="bill-form">
-        <input type="text" id="prescName" placeholder="Patient Name" required>
-        <input type="date" id="prescDate" required>
-        <input type="text" id="prescMedication" placeholder="Medication" required>
-        <input type="text" id="prescDosage" placeholder="Dosage" required>
-        </section>
-        <button class=" hero-btn" type="submit">Add Prescription</button>
+        <div class="bill-form">
+        <input type="text" placeholder="Patient Name" required>
+        <input type="date" required>
+        <input type="text" placeholder="Medication" required>
+        <input type="text" placeholder="Dosage" required>
+        </div>
+        <button class ="hero-btn" type="submit">Add Prescription</button>
       </form>
       <div style="margin-top:18px;">
         <div class="section-title" style="font-size:1.1rem;">Patient Prescriptions</div>
-        <ul id="prescriptionsList" class="prescriptions-list">
+        <ul id="prescriptionsList">
           <li class="no-items">No prescriptions yet.</li>
         </ul>
       </div>
     </div>
 
-    <!-- Billing Card -->
+    <!-- Billing -->
     <div id="billingCard" class="card hidden">
       <div class="section-title">Billing</div>
       <form id="billingForm">
-        <section class="bill-form">
-        <input type="text" id="billName" placeholder="Patient Name" required>
-        <input type="date" id="billDate" required>
-        <input type="number" id="billAmount" placeholder="Amount" required>
-        <input type="text" id="billDesc" placeholder="Description" required>
-        </section>
-        <button class = "hero-btn" type="submit">Add Bill</button>
+        <div class="bill-form">
+        <input type="text" placeholder="Patient Name" required>
+        <input type="date" required>
+        <input type="number" placeholder="Amount" required>
+        <input type="text" placeholder="Description" required>
+        </div>
+        <button class ="hero-btn" type="submit">Add Bill</button>
       </form>
       <div style="margin-top:18px;">
         <div class="section-title" style="font-size:1.1rem;">Billing Records</div>
-        <ul id="billingList" class="billing-list">
+        <ul id="billingList">
           <li class="no-items">No billing records yet.</li>
         </ul>
       </div>
     </div>
+
+    <!-- Services -->
+    <div id="servicesCard" class="card hidden">
+      <div class="section-title">Services Offered</div>
+      <div class="services-grid">
+        <div class="service-card">
+          <img src="https://img.freepik.com/free-photo/emergency-doctor_1098-18284.jpg" alt="Emergency Care">
+          <h3>Emergency Care</h3>
+          <p>24/7 emergency support and urgent medical attention.</p>
+        </div>
+        <div class="service-card">
+          <img src="https://img.freepik.com/free-photo/surgeon-team_1098-18056.jpg" alt="Specialized Treatments">
+          <h3>Specialized Treatments</h3>
+          <p>Expert care in cardiology, orthopedics, pediatrics, and more.</p>
+        </div>
+        <div class="service-card">
+          <img src="https://img.freepik.com/free-photo/mri-machine_1098-17246.jpg" alt="Diagnostics">
+          <h3>Diagnostic Services</h3>
+          <p>Advanced radiology and laboratory test facilities.</p>
+        </div>
+        <div class="service-card">
+          <img src="https://img.freepik.com/free-photo/pregnant-woman-hospital_1098-16214.jpg" alt="Maternity Care">
+          <h3>Maternity Care</h3>
+          <p>Comprehensive maternal and newborn healthcare.</p>
+        </div>
+        <div class="service-card">
+          <img src="https://img.freepik.com/free-photo/pharmacy-drugs_1098-15024.jpg" alt="Pharmaceuticals">
+          <h3>Pharmaceuticals</h3>
+          <p>Access to a wide range of prescribed medicines.</p>
+        </div>
+        <div class="service-card">
+          <img src="https://img.freepik.com/free-photo/rehab-center_1098-14462.jpg" alt="Rehabilitation">
+          <h3>Rehabilitation</h3>
+          <p>Specialized rehab programs for recovery and wellness.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Insurance / Payments -->
+    <div id="insuranceCard" class="card hidden">
+      <div class="section-title">Insurance & Payments</div>
+      <form class="payment-form">
+        <div class="bill-form">
+        <label for="paymentMethod">Choose Payment Method</label>
+        <select id="paymentMethod" required>
+          <option value="">--Select--</option>
+          <option value="mpesa">Mpesa</option>
+          <option value="credit">Credit/Debit Card</option>
+          <option value="insurance">Medical Insurance</option>
+        </select>
+
+        <div id="mpesaFields" class="hidden">
+          <input type="text" placeholder="Mpesa Phone Number" required>
+          <input type="text" placeholder="Transaction Code" required>
+        </div>
+
+        <div id="creditFields" class="hidden">
+          <input type="text" placeholder="Cardholder Name" required>
+          <input type="text" placeholder="Card Number" required>
+          <input type="text" placeholder="Expiry Date (MM/YY)" required>
+          <input type="text" placeholder="CVV" required>
+        </div>
+
+        <div id="insuranceFields" class="hidden">
+          <input type="text" placeholder="Insurance Provider" required>
+          <input type="text" placeholder="Policy Number" required>
+        </div>
+        </div>
+        <button class ="hero-btn" type="submit">Submit Payment</button>
+      </form>
+    </div>
   </div>
 
   <!-- Chatbot UI -->
-  <div id="chatbot-container">
-    <div id="chatbot-header">AI Health Chatbot</div>
-    <div id="chatbot-messages"></div>
+ <!-- Chatbot UI (starts minimized to avoid blocking content) -->
+  <div id="chatbot-container" class="minimized">
+    <div id="chatbot-header">
+      <span id="chatbot-title">AI Health Chatbot</span>
+      <button id="chatbot-toggle" aria-label="Open chat" title="Chat" type="button">💬</button>
+    </div>
+    <div id="chatbot-messages" aria-live="polite"></div>
     <div id="chatbot-input-area">
       <input type="text" id="chatbot-input" placeholder="Ask a health question...">
       <button id="chatbot-send">&#9658;</button>
@@ -384,140 +470,14 @@
       const sections = document.querySelectorAll('.card');
       sections.forEach(sec => {
         if (sec.id === sectionId) {
-          sec.classList.toggle('hidden'); // toggle clicked one
+          sec.classList.toggle('hidden');
         } else {
-          sec.classList.add('hidden'); // close others
+          sec.classList.add('hidden');
         }
       });
     }
 
-    // Appointment booking logic
-    const appointmentForm = document.getElementById('appointmentForm');
-    const appointmentsList = document.getElementById('appointmentsList');
-    let appointments = [];
-
-    appointmentForm.addEventListener('submit', function(e) {
-      e.preventDefault();
-      const name = document.getElementById('apptName').value;
-      const date = document.getElementById('apptDate').value;
-      const time = document.getElementById('apptTime').value;
-      const reason = document.getElementById('apptReason').value;
-
-      const appt = { name, date, time, reason };
-      appointments.push(appt);
-      renderAppointments();
-      appointmentForm.reset();
-    });
-
-    function renderAppointments() {
-      appointmentsList.innerHTML = '';
-      if (appointments.length === 0) {
-        appointmentsList.innerHTML = '<li class="no-items">No appointments yet.</li>';
-        return;
-      }
-      appointments.forEach(appt => {
-        const li = document.createElement('li');
-        li.innerHTML = `<strong>${appt.name}</strong> &mdash; ${appt.date} at ${appt.time}<br>
-          <span style="color:#185a9d;">Reason:</span> ${appt.reason}`;
-        appointmentsList.appendChild(li);
-      });
-    }
-
-    // Medical Records logic
-    const recordForm = document.getElementById('recordForm');
-    const recordsList = document.getElementById('recordsList');
-    let records = [];
-
-    recordForm.addEventListener('submit', function(e) {
-      e.preventDefault();
-      const name = document.getElementById('recordName').value;
-      const date = document.getElementById('recordDate').value;
-      const details = document.getElementById('recordDetails').value;
-
-      const record = { name, date, details };
-      records.push(record);
-      renderRecords();
-      recordForm.reset();
-    });
-
-    function renderRecords() {
-      recordsList.innerHTML = '';
-      if (records.length === 0) {
-        recordsList.innerHTML = '<li class="no-items">No records yet.</li>';
-        return;
-      }
-      records.forEach(rec => {
-        const li = document.createElement('li');
-        li.innerHTML = `<strong>${rec.name}</strong> &mdash; ${rec.date}<br>
-          <span style="color:#185a9d;">Details:</span> ${rec.details}`;
-        recordsList.appendChild(li);
-      });
-    }
-
-    // Prescription Management logic
-    const prescriptionForm = document.getElementById('prescriptionForm');
-    const prescriptionsList = document.getElementById('prescriptionsList');
-    let prescriptions = [];
-
-    prescriptionForm.addEventListener('submit', function(e) {
-      e.preventDefault();
-      const name = document.getElementById('prescName').value;
-      const date = document.getElementById('prescDate').value;
-      const medication = document.getElementById('prescMedication').value;
-      const dosage = document.getElementById('prescDosage').value;
-
-      const prescription = { name, date, medication, dosage };
-      prescriptions.push(prescription);
-      renderPrescriptions();
-      prescriptionForm.reset();
-    });
-
-    function renderPrescriptions() {
-      prescriptionsList.innerHTML = '';
-      if (prescriptions.length === 0) {
-        prescriptionsList.innerHTML = '<li class="no-items">No prescriptions yet.</li>';
-        return;
-      }
-      prescriptions.forEach(presc => {
-        const li = document.createElement('li');
-        li.innerHTML = `<strong>${presc.name}</strong> &mdash; ${presc.date}<br>
-          <span style="color:#185a9d;">Medication:</span> ${presc.medication} | <span style="color:#185a9d;">Dosage:</span> ${presc.dosage}`;
-        prescriptionsList.appendChild(li);
-      });
-    }
-
-    // Billing logic
-    const billingForm = document.getElementById('billingForm');
-    const billingList = document.getElementById('billingList');
-    let bills = [];
-
-    billingForm.addEventListener('submit', function(e) {
-      e.preventDefault();
-      const name = document.getElementById('billName').value;
-      const date = document.getElementById('billDate').value;
-      const amount = document.getElementById('billAmount').value;
-      const desc = document.getElementById('billDesc').value;
-
-      const bill = { name, date, amount, desc };
-      bills.push(bill);
-      renderBills();
-      billingForm.reset();
-    });
-
-    function renderBills() {
-      billingList.innerHTML = '';
-      if (bills.length === 0) {
-        billingList.innerHTML = '<li class="no-items">No billing records yet.</li>';
-        return;
-      }
-      bills.forEach(bill => {
-        const li = document.createElement('li');
-        li.innerHTML = `<strong>${bill.name}</strong> &mdash; ${bill.date}<br>
-          <span style="color:#185a9d;">Amount:</span> $${bill.amount} | <span style="color:#185a9d;">Description:</span> ${bill.desc}`;
-        billingList.appendChild(li);
-      });
-    }
-
+    // Show fields depending on payment method
     // Chatbot logic
     const chatbotMessages = document.getElementById('chatbot-messages');
     const chatbotInput = document.getElementById('chatbot-input');
@@ -566,6 +526,46 @@
     chatbotInput.addEventListener('keydown', function(e) {
       if (e.key === 'Enter') handleChatbotSend();
     });
+
+    // Chat toggle button (minimized by default)
+  const chatbotContainer = document.getElementById('chatbot-container');
+ 
+      chatbotToggle = document.getElementById('chatbot-toggle');
+    // Ensure elements exist (in case older markup is used)
+    if (chatbotToggle && chatbotContainer) {
+      chatbotToggle.addEventListener('click', () => {
+        const isExpanded = chatbotContainer.classList.toggle('expanded');
+        // update aria/labels for accessibility
+        chatbotToggle.setAttribute('aria-pressed', isExpanded ? 'true' : 'false');
+        chatbotToggle.title = isExpanded ? 'Close chat' : 'Open chat';
+        // focus input when opening
+        if (isExpanded) {
+          setTimeout(() => chatbotInput.focus(), 160);
+        }
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const paymentMethod = document.getElementById("paymentMethod");
+      const mpesaFields = document.getElementById("mpesaFields");
+      const creditFields = document.getElementById("creditFields");
+      const insuranceFields = document.getElementById("insuranceFields");
+
+      paymentMethod.addEventListener("change", () => {
+        mpesaFields.classList.add("hidden");
+        creditFields.classList.add("hidden");
+        insuranceFields.classList.add("hidden");
+
+        if (paymentMethod.value === "mpesa") {
+          mpesaFields.classList.remove("hidden");
+        } else if (paymentMethod.value === "credit") {
+          creditFields.classList.remove("hidden");
+        } else if (paymentMethod.value === "insurance") {
+          insuranceFields.classList.remove("hidden");
+        }
+      });
+    });
+ 
   </script>
 </body>
-</html>
+</html
